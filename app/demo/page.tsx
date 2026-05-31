@@ -241,6 +241,9 @@ export default function MindGuardDemo() {
     if (recorder.stream && step === 'recording') {
       videoEl.srcObject = recorder.stream;
 
+      // Force non-mirrored preview (Telegram-style, no selfie mirror)
+      videoEl.style.transform = 'scaleX(1)';
+
       // Explicit .play() is required on iOS Safari in many cases
       const playPromise = videoEl.play();
       if (playPromise !== undefined) {
@@ -375,20 +378,64 @@ export default function MindGuardDemo() {
               <div className="text-3xl sm:text-4xl font-semibold tracking-tight">{t.demo.recording.title}</div>
             </div>
 
-            {/* Big beautiful preview + waveform */}
-            <div className="relative aspect-video rounded-3xl overflow-hidden bg-black border border-[#272b33] mb-6">
-              <video
-                ref={recordingVideoRef}
-                autoPlay
-                muted
-                playsInline
-                webkit-playsinline="true"
-                controls={false}
-                disablePictureInPicture
-                className="absolute inset-0 w-full h-full object-cover bg-black"
-                style={{ transform: 'scaleX(1)' }}
-              />
-              <div className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-black/70 to-transparent" />
+            {/* Circular Recording Preview with 60s Timer Ring (Telegram-style, non-mirrored) */}
+            <div className="flex justify-center mb-6">
+              {(() => {
+                const SIZE = 280;
+                const STROKE = 10;
+                const RADIUS = SIZE / 2 - STROKE / 2 - 6;
+                const CIRCUMFERENCE = 2 * Math.PI * RADIUS;
+                const progress = Math.min(recorder.duration / 60, 1);
+                const dashOffset = CIRCUMFERENCE * (1 - progress);
+
+                return (
+                  <div className="relative" style={{ width: SIZE, height: SIZE }}>
+                    {/* Timer Progress Ring */}
+                    <svg
+                      width={SIZE}
+                      height={SIZE}
+                      className="absolute inset-0 -rotate-90"
+                    >
+                      {/* Background ring */}
+                      <circle
+                        cx={SIZE / 2}
+                        cy={SIZE / 2}
+                        r={RADIUS}
+                        fill="none"
+                        stroke="#272b33"
+                        strokeWidth={STROKE}
+                      />
+                      {/* Green progress ring */}
+                      <circle
+                        cx={SIZE / 2}
+                        cy={SIZE / 2}
+                        r={RADIUS}
+                        fill="none"
+                        stroke="#00ff9d"
+                        strokeWidth={STROKE}
+                        strokeLinecap="round"
+                        strokeDasharray={CIRCUMFERENCE}
+                        strokeDashoffset={dashOffset}
+                      />
+                    </svg>
+
+                    {/* Video Circle */}
+                    <div className="absolute inset-[14px] rounded-full overflow-hidden border-2 border-[#272b33] bg-black">
+                      <video
+                        ref={recordingVideoRef}
+                        autoPlay
+                        muted
+                        playsInline
+                        webkit-playsinline="true"
+                        controls={false}
+                        disablePictureInPicture
+                        className="w-full h-full object-cover"
+                        style={{ transform: 'scaleX(1)' }}
+                      />
+                    </div>
+                  </div>
+                );
+              })()}
             </div>
 
             {/* Waveform */}
