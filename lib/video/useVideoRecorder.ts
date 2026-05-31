@@ -95,12 +95,20 @@ export function useVideoRecorder(options: UseVideoRecorderOptions = {}) {
     setState((s) => ({ ...s, error: null }));
 
     try {
+      const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
+
+      // On iPhone Safari, being too specific with resolution often causes MediaRecorder
+      // to drop the video track entirely (sound only). Be very conservative.
+      const videoConstraints = isIOS
+        ? { facingMode: 'user' } // Let iOS decide — most reliable
+        : {
+            facingMode: 'user',
+            width: { ideal: 720 },
+            height: { ideal: 1280 },
+          };
+
       const stream = await navigator.mediaDevices.getUserMedia({
-        video: {
-          facingMode: 'user',
-          width: { ideal: 1280 },
-          height: { ideal: 720 },
-        },
+        video: videoConstraints,
         audio: {
           echoCancellation: true,
           noiseSuppression: true,
@@ -247,8 +255,29 @@ export function useVideoRecorder(options: UseVideoRecorderOptions = {}) {
   };
 }
 
-/** Best-effort MIME type for broadest compatibility (especially mobile). */
+/** 
+ * Smart MIME type selection.
+ * iOS Safari has very poor WebM support in MediaRecorder (often records audio-only or fails).
+ * We prioritize MP4 on iOS for reliable video+audio recording.
+ */
 function getSupportedMimeType(): string | null {
+  const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
+
+  if (isIOS) {
+    // iOS Safari works best with MP4/H.264
+    const iosCandidates = [
+      'video/mp4;codecs="avc1.42E01E"', // Baseline H.264 - most compatible on iOS
+      'video/mp4;codecs=h264',
+      'video/mp4',
+    ];
+    for (const type of iosCandidates) {
+      if (MediaRecorder.isTypeSupported(type)) return type;
+    }
+    // Last resort on iOS
+    return MediaRecorder.isTypeSupported('video/mp4') ? 'video/mp4' : null;
+  }
+
+  // Desktop + Android: prefer WebM for better quality
   const candidates = [
     'video/webm;codecs=vp9',
     'video/webm;codecs=vp8',

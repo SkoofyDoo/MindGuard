@@ -8,8 +8,7 @@ const nextConfig: NextConfig = {
     remotePatterns: [],
   },
 
-  // Разрешаем доступ к камере/микрофону в production
-  // (важно для iOS Safari и некоторых браузеров)
+  // Camera & microphone permissions for production (critical for iOS Safari + Android)
   async headers() {
     return [
       {
@@ -17,7 +16,12 @@ const nextConfig: NextConfig = {
         headers: [
           {
             key: 'Permissions-Policy',
-            value: 'camera=(self), microphone=(self)',
+            value: 'camera=(self), microphone=(self), display-capture=(self)',
+          },
+          // Legacy fallback for older browsers / stricter mobile clients
+          {
+            key: 'Feature-Policy',
+            value: "camera 'self'; microphone 'self'",
           },
         ],
       },

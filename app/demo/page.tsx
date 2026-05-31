@@ -101,11 +101,32 @@ export default function MindGuardDemo() {
       setFrames(extracted);
       setSelectedFrames(extracted.filter(f => f.selected));
       setExtractionProgress(null);
+
+      // Guard against the common iOS "1 frame only" situation (usually means broken video track)
+      if (extracted.length <= 1) {
+        alert(
+          'Almost no usable video frames were found.\n\n' +
+          'This usually means the recording on iPhone Safari only captured audio.\n\n' +
+          'Best workaround right now: Use "Upload video from gallery" with a video you recorded in the normal Camera app.'
+        );
+        setStep('intro');
+        return;
+      }
+
       setStep('selecting');
     } catch (e: any) {
       console.error(e);
       setExtractionProgress(null);
-      alert(e?.message || t.demo.errors.loadVideo);
+      const msg = e?.message || t.demo.errors.loadVideo;
+
+      // Special case for the very common iOS "audio only" recording bug
+      const isNoVideoTrack = msg.includes('No video track') || msg.includes('video track');
+
+      const finalMsg = isNoVideoTrack
+        ? 'Recording captured sound but no video.\n\nThis is a known limitation of iPhone Safari in some versions.\n\nWorkarounds:\n• Try recording again (sometimes it works on the 2nd try)\n• Use "Upload video from gallery" instead (most reliable on iPhone)\n• Try in Chrome on iPhone if available'
+        : msg;
+
+      alert(finalMsg);
       setStep('intro');
     }
   };
@@ -336,6 +357,7 @@ export default function MindGuardDemo() {
                   autoPlay
                   muted
                   playsInline
+                  webkit-playsinline="true"
                   ref={(el) => { if (el && recorder.stream) el.srcObject = recorder.stream; }}
                   className="absolute inset-0 w-full h-full object-cover"
                 />

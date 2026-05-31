@@ -30,20 +30,47 @@ export function loadVideo(blob: Blob): Promise<{ video: HTMLVideoElement; revoke
     video.preload = 'metadata';
     video.muted = true;
     video.playsInline = true;
+    video.setAttribute('webkit-playsinline', 'true'); // older iOS
+    video.crossOrigin = 'anonymous';
 
     const revoke = () => URL.revokeObjectURL(url);
 
-    video.onloadedmetadata = () => {
-      video.currentTime = 0.01;
+    const timeout = setTimeout(() => {
+      revoke();
+      reject(new Error('Video loading timed out. This can happen on some mobile devices.'));
+    }, 12000);
+
+    video.onloadedmetadata = async () => {
+      clearTimeout(timeout);
+
+      // iOS Safari sometimes needs extra time + play/pause to fully initialize video track
+      try {
+        await video.play().catch(() => {});
+        await new Promise(r => setTimeout(r, 120)); // small breathing room
+        video.pause();
+
+        // If after this we still have no video dimensions, it's likely an audio-only recording
+        if (video.videoWidth === 0 || video.videoHeight === 0) {
+          // Still resolve — the check in extractAndScoreFrames will give a better error
+          resolve({ video, revoke });
+          return;
+        }
+
+        video.currentTime = 0.08;
+      } catch {
+        video.currentTime = 0.08;
+      }
     };
 
     video.onseeked = () => {
+      clearTimeout(timeout);
       resolve({ video, revoke });
     };
 
     video.onerror = (e) => {
+      clearTimeout(timeout);
       revoke();
-      reject(new Error('Failed to load recorded video: ' + (e as any)?.message));
+      reject(new Error('Failed to load recorded video. Try a shorter recording or different device.'));
     };
 
     video.src = url;
@@ -72,13 +99,25 @@ export async function extractAndScoreFrames(
   try {
     const duration = video.duration;
 
+    // Critical check for iOS Safari: sometimes MediaRecorder produces audio-only blobs
+    if (!video.videoWidth || !video.videoHeight) {
+      throw new Error(
+        'No video track was recorded. On iPhone Safari this often happens with certain settings. ' +
+        'Try recording again, or use the "Upload from gallery" option as a workaround.'
+      );
+    }
+
     if (!duration || !isFinite(duration) || duration < 5) {
       throw new Error('Video is too short for analysis (minimum ~8 seconds).');
     }
 
     const candidates: Array<{ timestamp: number; dataUrl: string; sharpnessData: ReturnType<typeof computeSharpness> }> = [];
 
-    const totalCandidates = Math.min(targetCount, Math.floor(duration / sampleEverySeconds));
+    // Mobile devices have much less reliable video seeking. Be conservative.
+    const isMobile = /iPhone|iPad|Android/i.test(navigator.userAgent);
+    const effectiveTarget = isMobile ? Math.min(12, targetCount) : targetCount;
+
+    const totalCandidates = Math.min(effectiveTarget, Math.floor(duration / sampleEverySeconds));
 
     for (let i = 0; i < totalCandidates; i++) {
       const t = Math.min(duration - 0.2, (i + 0.5) * sampleEverySeconds);
@@ -91,24 +130,41 @@ export async function extractAndScoreFrames(
         message: `Analyzing frame ${i + 1} of ${totalCandidates}`,
       });
 
-      await new Promise<void>((resolve) => {
-        const onSeek = () => {
-          video.removeEventListener('seeked', onSeek);
-          resolve();
-        };
-        video.addEventListener('seeked', onSeek, { once: true });
-        video.currentTime = t;
-      });
+      // Seek with timeout — prevents hanging forever on problematic mobile videos
+      try {
+        await new Promise<void>((resolve, reject) => {
+          const seekTimeout = setTimeout(() => {
+            video.removeEventListener('seeked', onSeek);
+            reject(new Error('seek timeout'));
+          }, 3500);
 
-      const { canvas } = drawVideoFrame(video, maxWidth);
-      const dataUrl = canvas.toDataURL('image/jpeg', 0.82);
-      const sharpnessData = computeSharpness(video);
+          const onSeek = () => {
+            clearTimeout(seekTimeout);
+            video.removeEventListener('seeked', onSeek);
+            resolve();
+          };
 
-      candidates.push({
-        timestamp: t,
-        dataUrl,
-        sharpnessData,
-      });
+          video.addEventListener('seeked', onSeek, { once: true });
+          video.currentTime = t;
+        });
+      } catch {
+        // Skip this frame if seeking fails (common on some iOS versions)
+        continue;
+      }
+
+      try {
+        const { canvas } = drawVideoFrame(video, maxWidth);
+        const dataUrl = canvas.toDataURL('image/jpeg', 0.82);
+        const sharpnessData = computeSharpness(video);
+
+        candidates.push({
+          timestamp: t,
+          dataUrl,
+          sharpnessData,
+        });
+      } catch (e) {
+        console.warn('Failed to extract frame at', t);
+      }
     }
 
     onProgress?.({
