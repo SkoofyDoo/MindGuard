@@ -26,6 +26,15 @@ export function SelfPricingForm() {
     setError('');
     setIsSubmitting(true);
 
+    // If user wants to join Waitlist, name + email are mandatory
+    if (joinWaitlist) {
+      if (!name.trim() || !email.trim()) {
+        setError(sp.waitlistRequiredError || 'Для подписки на Waitlist укажите ваше полное имя и email.');
+        setIsSubmitting(false);
+        return;
+      }
+    }
+
     try {
       const response = await fetch('/api/waitlist', {
         method: 'POST',
@@ -148,7 +157,13 @@ export function SelfPricingForm() {
           <input
             type="checkbox"
             checked={joinWaitlist}
-            onChange={(e) => setJoinWaitlist(e.target.checked)}
+            onChange={(e) => {
+              setJoinWaitlist(e.target.checked);
+              // Clear waitlist-specific error when user changes the checkbox
+              if (error && error.includes('Waitlist')) {
+                setError('');
+              }
+            }}
             className="mt-1 h-5 w-5 accent-[#00ff9d]"
           />
           <div className="text-left">
@@ -162,22 +177,41 @@ export function SelfPricingForm() {
         </label>
       </div>
 
-      {/* Contact info (optional but useful) */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <input
-          type="text"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-          placeholder={sp.namePlaceholder || "Ваше имя (опционально)"}
-          className="rounded-2xl border border-[#272b33] bg-[#0a0b0f] px-5 py-3 focus:border-[#00ff9d] focus:outline-none"
-        />
-        <input
-          type="email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          placeholder={sp.emailPlaceholder || "Email (опционально)"}
-          className="rounded-2xl border border-[#272b33] bg-[#0a0b0f] px-5 py-3 focus:border-[#00ff9d] focus:outline-none"
-        />
+      {/* Contact info — required only when joining Waitlist */}
+      <div>
+        {joinWaitlist && (
+          <div className="text-sm text-[#94a3b8] mb-2">
+            {sp.waitlistContactHint || 'Для подписки на Waitlist укажите:'}
+          </div>
+        )}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <input
+            type="text"
+            value={name}
+            onChange={(e) => {
+              setName(e.target.value);
+              if (error && error.includes('Waitlist')) setError('');
+            }}
+            placeholder={joinWaitlist 
+              ? (sp.nameRequired || 'Полное имя *') 
+              : (sp.namePlaceholder || "Ваше имя (опционально)")}
+            required={joinWaitlist}
+            className="rounded-2xl border border-[#272b33] bg-[#0a0b0f] px-5 py-3 focus:border-[#00ff9d] focus:outline-none"
+          />
+          <input
+            type="email"
+            value={email}
+            onChange={(e) => {
+              setEmail(e.target.value);
+              if (error && error.includes('Waitlist')) setError('');
+            }}
+            placeholder={joinWaitlist 
+              ? (sp.emailRequired || 'Email *') 
+              : (sp.emailPlaceholder || "Email (опционально)")}
+            required={joinWaitlist}
+            className="rounded-2xl border border-[#272b33] bg-[#0a0b0f] px-5 py-3 focus:border-[#00ff9d] focus:outline-none"
+          />
+        </div>
       </div>
 
       {error && (
