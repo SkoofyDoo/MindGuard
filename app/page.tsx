@@ -15,7 +15,6 @@ export default function MindGuardLanding() {
         <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
           <div className="flex items-center gap-3">
             <div className="font-semibold tracking-tight text-xl">MindGuard</div>
-            <div className="text-[10px] px-2 py-px rounded bg-[#121317] text-[#85edb2] tracking-[1px]">2026</div>
           </div>
           <div className="flex items-center gap-6 text-sm">
             <a href="#how" className="hover:text-[#85edb2] transition-colors">{t.landing.nav.how}</a>

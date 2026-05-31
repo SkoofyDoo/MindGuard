@@ -37,7 +37,7 @@ export const translations = {
         demo: 'Попробовать демо',
       },
       hero: {
-        badge: 'ДЫМ, А НЕ ОГОНЬ',
+        badge: 'МОНИТОРИНГ НАСТРОЕНИЯ',
         title: '1 минута в день,\nчтобы понять себя лучше.',
         subtitle: 'Премиальный, спокойный и полностью приватный AI-компаньон.\nНикакой диагностики. Только красота и лёгкие инсайты.',
         ctaDemo: 'Попробовать Live Demo',
@@ -57,8 +57,8 @@ export const translations = {
       selfPricingBadge: 'SELF-PRICING + FEEDBACK',
       philosophy: {
         label: 'ФИЛОСОФИЯ ПРОЕКТА',
-        title: 'Дым, а не огонь.',
-        text: 'Это не терапевт. Не медицинский инструмент.\nЭто красивый, успокаивающий опыт на 1–2 минуты, после которого вы уходите с ощущением:\n«Вау. Это было полезно и приятно».',
+        title: 'Понимай своё настроение лучше.',
+        text: 'Это не терапия. Это умный инструмент на базе ИИ, который помогает отслеживать настроение, даёт персональные советы и показывает долгосрочные тренды.',
       },
       waitlist: {
         title: 'Сколько MindGuard стоит для вас?',
@@ -258,7 +258,7 @@ export const translations = {
         demo: 'Try the demo',
       },
       hero: {
-        badge: 'SMOKE, NOT FIRE',
+        badge: 'AI MOOD MONITORING',
         title: 'One minute a day\nto understand yourself better.',
         subtitle: 'A premium, calm, and fully private AI companion.\nNo diagnosis. Only beauty and gentle insights.',
         ctaDemo: 'Try Live Demo',
@@ -278,8 +278,8 @@ export const translations = {
       selfPricingBadge: 'SELF-PRICING + FEEDBACK',
       philosophy: {
         label: 'PROJECT PHILOSOPHY',
-        title: 'Smoke, not fire.',
-        text: 'This is not a therapist. Not a medical tool.\nIt is a beautiful, calming 1–2 minute experience after which you leave with the feeling:\n"Wow. That was genuinely useful and pleasant."',
+        title: 'Understand your mood better.',
+        text: 'This is not therapy. It is an AI-powered tool that helps you track your mood, delivers personalized advice, and reveals long-term emotional patterns.',
       },
       waitlist: {
         title: 'How much would MindGuard be worth to you?',
@@ -479,7 +479,7 @@ export const translations = {
         demo: 'Demo ausprobieren',
       },
       hero: {
-        badge: 'RAUCH, KEIN FEUER',
+        badge: 'KI-STIMMUNGSMONITORING',
         title: 'Eine Minute am Tag,\num sich selbst besser zu verstehen.',
         subtitle: 'Ein premium, ruhiger und komplett privater KI-Begleiter.\nKeine Diagnose. Nur Schönheit und sanfte Einsichten.',
         ctaDemo: 'Live-Demo ausprobieren',
@@ -499,8 +499,8 @@ export const translations = {
       selfPricingBadge: 'SELF-PRICING + FEEDBACK',
       philosophy: {
         label: 'PROJEKT-PHILOSOPHIE',
-        title: 'Rauch, kein Feuer.',
-        text: 'Das ist kein Therapeut. Kein medizinisches Werkzeug.\nEs ist eine schöne, beruhigende 1–2-Minuten-Erfahrung, nach der du mit dem Gefühl gehst:\n„Wow. Das war wirklich hilfreich und angenehm.“',
+        title: 'Verstehe deine Stimmung besser.',
+        text: 'Das ist keine Therapie. Es ist ein KI-basiertes Tool, das dir hilft, deine Stimmung zu tracken, personalisierte Ratschläge gibt und langfristige emotionale Muster sichtbar macht.',
       },
       waitlist: {
         title: 'Wie viel wäre dir MindGuard wert?',

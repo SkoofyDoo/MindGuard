@@ -17,8 +17,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "MindGuard — Smoke, not fire",
-  description: "A premium, calm, fully private multimodal AI companion for emotional wellbeing. 1–2 minutes a day to understand yourself better. Premium. Calm. Private.",
+  title: "MindGuard — AI Mood Monitoring",
+  description: "AI-powered mood monitoring tool. Track your emotions, receive personalized advice, and see long-term statistics. Private. Simple. Effective.",
   icons: {
     icon: "/favicon.ico",
   },

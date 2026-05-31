@@ -1,32 +1,28 @@
 # MindGuard
 
-**Smoke, not fire.**
+**AI Mood Monitoring**
 
-A premium, calm, and radically private AI companion for emotional self-understanding.
+An AI-powered tool that helps you track your mood, receive personalized advice, and view long-term emotional statistics.
 
 ---
 
 ## The Idea
 
-MindGuard is a lightweight daily ritual for people who want to understand themselves better — without the weight of therapy, diagnostics, or data exploitation.
+MindGuard is an AI-powered mood monitoring tool. You record a short 30–60 second video talking about your day. The app analyzes your facial expressions and voice locally, then gives you personalized recommendations and tracks your emotional trends over time.
 
-Instead of filling out questionnaires or talking to an AI therapist, the user records a short 30–60 second video where they simply speak about their day. The application processes everything locally in the browser: it extracts frames, scores them for sharpness and expressiveness, and only considers a small selection of the best moments. In the future, these frames will be encrypted before ever leaving the device.
-
-The result is not a diagnosis. It is a set of gentle, empathetic observations and personal recommendations — beautiful, calm, and honest.
-
-The guiding philosophy is simple: **this is smoke, not fire.** A pleasant 1–2 minute experience that leaves you with the feeling “that was genuinely useful,” not “I need to fix myself.”
+The goal is practical: help you understand your mood patterns, receive useful advice, and see real progress through statistics — without questionnaires, without therapy framing, and with maximum privacy.
 
 ## The Goal
 
-To help people build a kinder, more honest, and more nuanced relationship with their own emotional life through short, aesthetically pleasing, and completely private moments of reflection.
+To give people a simple, private, and effective way to monitor their mood using AI.
 
-MindGuard deliberately avoids:
+MindGuard helps users:
 
-- Medical framing and pathologizing language
-- Storing raw video or audio on any server
-- Turning self-awareness into another optimization task
+- Quickly log how they feel through video
+- Receive personalized, actionable advice
+- See clear statistics and long-term emotional trends
 
-It exists to make emotional self-understanding feel like a small luxury rather than a clinical obligation.
+The tool is designed to be useful and non-intrusive — focused on monitoring and improvement rather than clinical diagnosis.
 
 ## Philosophy
 
