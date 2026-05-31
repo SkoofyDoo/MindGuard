@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { PipelineVisualizer, type PipelineStage } from '@/components/demo/PipelineVisualizer';
 import { useVideoRecorder, extractAndScoreFrames, type VideoFrame, type CheckInResult } from '@/lib/video';
 import { generateMockResult } from '@/lib/mockAnalysis';
@@ -34,6 +34,9 @@ export default function MindGuardDemo() {
 
   // Drag & Drop UI state
   const [isDragging, setIsDragging] = useState(false);
+
+  // Reliable ref for live camera preview (critical for iOS Safari)
+  const recordingVideoRef = useRef<HTMLVideoElement>(null);
 
   // Store the duration of the last check-in so we can re-generate advice when language changes
   const [lastCheckInDuration, setLastCheckInDuration] = useState<number | null>(null);
@@ -228,6 +231,28 @@ export default function MindGuardDemo() {
     }
   };
 
+  // === Reliable live camera preview for iOS Safari ===
+  // The old inline ref callback was very flaky on iPhone.
+  // This useEffect + useRef pattern is significantly more stable.
+  useEffect(() => {
+    const videoEl = recordingVideoRef.current;
+    if (!videoEl) return;
+
+    if (recorder.stream && step === 'recording') {
+      videoEl.srcObject = recorder.stream;
+
+      // Explicit .play() is required on iOS Safari in many cases
+      const playPromise = videoEl.play();
+      if (playPromise !== undefined) {
+        playPromise.catch((err) => {
+          console.warn('[iOS Preview] play() blocked or failed:', err);
+        });
+      }
+    } else if (videoEl.srcObject) {
+      videoEl.srcObject = null;
+    }
+  }, [recorder.stream, step]);
+
   const resetDemo = () => {
     setStep('intro');
     setRecordedBlob(null);
@@ -352,16 +377,16 @@ export default function MindGuardDemo() {
 
             {/* Big beautiful preview + waveform */}
             <div className="relative aspect-video rounded-3xl overflow-hidden bg-black border border-[#272b33] mb-6">
-              {recorder.stream && (
-                <video
-                  autoPlay
-                  muted
-                  playsInline
-                  webkit-playsinline="true"
-                  ref={(el) => { if (el && recorder.stream) el.srcObject = recorder.stream; }}
-                  className="absolute inset-0 w-full h-full object-cover"
-                />
-              )}
+              <video
+                ref={recordingVideoRef}
+                autoPlay
+                muted
+                playsInline
+                webkit-playsinline="true"
+                controls={false}
+                disablePictureInPicture
+                className="absolute inset-0 w-full h-full object-cover bg-black"
+              />
               <div className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-black/70 to-transparent" />
             </div>
 
