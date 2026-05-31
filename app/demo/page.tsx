@@ -242,7 +242,8 @@ export default function MindGuardDemo() {
       videoEl.srcObject = recorder.stream;
 
       // Force non-mirrored preview (Telegram-style, no selfie mirror)
-      videoEl.style.transform = 'scaleX(1)';
+      // scaleX(-1) is needed because Safari mirrors user camera by default
+      videoEl.style.transform = 'scaleX(-1)';
 
       // Explicit .play() is required on iOS Safari in many cases
       const playPromise = videoEl.play();
@@ -430,7 +431,7 @@ export default function MindGuardDemo() {
                         controls={false}
                         disablePictureInPicture
                         className="w-full h-full object-cover"
-                        style={{ transform: 'scaleX(1)' }}
+                        style={{ transform: 'scaleX(-1)' }}
                       />
                     </div>
                   </div>
