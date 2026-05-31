@@ -73,7 +73,7 @@ export default function MindGuardDemo() {
    */
   const processVideoLocally = async (blob: Blob) => {
     setRecordedBlob(blob);
-    setExtractionProgress({ percent: 0, message: 'Preparing video...', current: 0, total: 1 });
+    setExtractionProgress({ percent: 0, message: (t as any).demo?.extraction?.preparing || 'Preparing video...', current: 0, total: 1 });
     setStep('extracting');
 
     try {
@@ -81,9 +81,17 @@ export default function MindGuardDemo() {
         targetCount: 22,
         sampleEverySeconds: 0.85,
         onProgress: (p) => {
+          // Translate known progress messages from the video library
+          let translatedMessage = p.message || ((t as any).demo?.extraction?.preparing || 'Processing frames...');
+          const ext = (t as any).demo?.extraction || {};
+          if (p.message?.startsWith('Analyzing frame')) {
+            translatedMessage = ext.analyzingFrame ? ext.analyzingFrame(p.current, p.total) : p.message;
+          } else if (p.message === 'Selecting best frames...') {
+            translatedMessage = ext.selectingBest || p.message;
+          }
           setExtractionProgress({
             percent: p.percent,
-            message: p.message || 'Processing frames...',
+            message: translatedMessage,
             current: p.current,
             total: p.total,
           });
@@ -149,7 +157,7 @@ export default function MindGuardDemo() {
   /** Upload video from device (click or drag & drop) */
   const handleFileUpload = async (file: File) => {
     if (!file.type.startsWith('video/')) {
-      alert('Please select a video file');
+      alert(t.demo.errors.selectVideoFile || 'Please select a video file');
       return;
     }
 
@@ -283,9 +291,9 @@ export default function MindGuardDemo() {
         {step === 'extracting' && extractionProgress && (
           <div className="max-w-xl mx-auto pt-20 text-center">
             <div className="mb-8">
-              <div className="text-[#85edb2] text-sm tracking-[3px] mb-2">LOCAL PROCESSING</div>
-              <h2 className="text-4xl font-semibold tracking-tight">Analyzing your video on device</h2>
-              <p className="mt-3 text-[#94a3b8]">Extracting &amp; scoring frames locally. Nothing leaves your browser.</p>
+              <div className="text-[#85edb2] text-sm tracking-[3px] mb-2">{(t as any).demo?.extraction?.title || 'LOCAL PROCESSING'}</div>
+              <h2 className="text-4xl font-semibold tracking-tight">{(t as any).demo?.extraction?.analyzing || 'Analyzing your video on device'}</h2>
+              <p className="mt-3 text-[#94a3b8]">{(t as any).demo?.extraction?.extracting || 'Extracting & scoring frames locally. Nothing leaves your browser.'}</p>
             </div>
 
             {/* Premium calm progress bar */}
@@ -308,7 +316,7 @@ export default function MindGuardDemo() {
             </div>
 
             <div className="mt-12 text-xs text-[#64748b]">
-              This can take a few seconds for longer videos. All computation happens on your device.
+              {(t as any).demo?.extraction?.timeNote || 'This can take a few seconds for longer videos. All computation happens on your device.'}
             </div>
           </div>
         )}
@@ -412,7 +420,7 @@ export default function MindGuardDemo() {
             {/* Overall progress bar for the analysis phase */}
             <div className="mx-auto mb-8 max-w-md">
               <div className="mb-2 flex justify-between text-xs text-[#64748b]">
-                <span>Deep multimodal analysis</span>
+                <span>{(t as any).demo?.processing?.progressLabel || 'Deep multimodal analysis'}</span>
                 <span>
                   {Math.round((['local-extract','quality','encrypt','transmit','vision','audio','text','supervisor'].indexOf(processingStage) + 1) / 8 * 100)}%
                 </span>

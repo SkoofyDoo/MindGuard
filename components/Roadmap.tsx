@@ -69,10 +69,10 @@ export function Roadmap() {
     <section className="border-t border-[#272b33] bg-[#0a0b0f] py-20">
       <div className="max-w-5xl mx-auto px-6">
         <div className="text-center mb-14">
-          <div className="text-[#85edb2] text-xs tracking-[3px] mb-3">ПРОЗРАЧНОСТЬ</div>
-          <h2 className="text-5xl font-semibold tracking-[-1.5px] mb-4">{(isRussian ? 'План развития' : roadmap.title) || 'Roadmap'}</h2>
+          <div className="text-[#85edb2] text-xs tracking-[3px] mb-3">{roadmap.transparencyBadge || (isRussian ? 'ПРОЗРАЧНОСТЬ' : 'TRANSPARENCY')}</div>
+          <h2 className="text-5xl font-semibold tracking-[-1.5px] mb-4">{roadmap.title || (isRussian ? 'План развития' : 'Roadmap')}</h2>
           <p className="text-xl text-[#94a3b8] max-w-md mx-auto">
-            { (isRussian ? 'Что мы планируем сделать в ближайшее время' : roadmap.subtitle) || 'What we plan to build in the near future' }
+            { roadmap.subtitle || (isRussian ? 'Что мы планируем сделать в ближайшее время' : 'What we plan to build in the near future') }
           </p>
         </div>
 

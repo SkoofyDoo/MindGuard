@@ -44,10 +44,10 @@ export function SelfPricingForm() {
       if (response.ok) {
         setSubmitted(true);
       } else {
-        setError(data.message || 'Что-то пошло не так. Попробуйте ещё раз.');
+        setError(data.message || sp.submitError || 'Something went wrong. Please try again.');
       }
     } catch (err) {
-      setError('Ошибка соединения. Проверьте интернет и попробуйте снова.');
+      setError(sp.networkError || 'Connection error. Please check your internet and try again.');
     } finally {
       setIsSubmitting(false);
     }

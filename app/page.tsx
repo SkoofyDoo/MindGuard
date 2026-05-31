@@ -53,7 +53,7 @@ export default function MindGuardLanding() {
       {/* Trust / Pipeline teaser */}
       <div id="how" className="border-t border-[#272b33] bg-[#121317] py-16">
         <div className="max-w-5xl mx-auto px-6">
-          <div className="uppercase tracking-[3px] text-xs text-[#85edb2] mb-4">DATA TRANSPARENCY — TRUST FOUNDATION</div>
+          <div className="uppercase tracking-[3px] text-xs text-[#85edb2] mb-4">{(t as any).landing?.transparencyBadge || 'TRANSPARENCY — TRUST FOUNDATION'}</div>
           <div className="text-4xl font-semibold tracking-tight mb-10">{t.landing.how.title}</div>
           
           {/* Mini Pipeline */}
@@ -87,13 +87,13 @@ export default function MindGuardLanding() {
       <div id="waitlist" className="border-t border-[#272b33] bg-[#121317] py-20">
         <div className="max-w-2xl mx-auto px-6">
           <div className="text-center mb-10">
-            <div className="text-[#85edb2] text-xs tracking-[3px] mb-4">SELF-PRICING + FEEDBACK</div>
+            <div className="text-[#85edb2] text-xs tracking-[3px] mb-4">{(t as any).landing?.selfPricingBadge || (t as any).landing?.selfPricing?.title || 'SELF-PRICING + FEEDBACK'}</div>
             <h3 className="text-5xl font-semibold tracking-[-1.2px] mb-4">
-              { (t as any).landing?.selfPricing?.title || 'Сколько MindGuard стоит для вас?' }
+              { (t as any).landing?.selfPricing?.title || 'How much would MindGuard be worth to you?' }
             </h3>
             <p className="text-[#94a3b8] max-w-lg mx-auto">
               { (t as any).landing?.selfPricing?.subtitle || 
-                'Выберите комфортную для вас цену и оставьте фидбек. Это поможет нам правильно спроектировать продукт.' }
+                'Choose a comfortable price and leave your feedback. This helps us design the product correctly.' }
             </p>
           </div>
 

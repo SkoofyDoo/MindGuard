@@ -53,6 +53,8 @@ export const translations = {
           { num: '4', title: 'Только 5–10 кадров', desc: 'Сервер никогда не видит оригинал' },
         ],
       },
+      transparencyBadge: 'ПРОЗРАЧНОСТЬ',
+      selfPricingBadge: 'SELF-PRICING + FEEDBACK',
       philosophy: {
         label: 'ФИЛОСОФИЯ ПРОЕКТА',
         title: 'Дым, а не огонь.',
@@ -85,6 +87,8 @@ export const translations = {
         sendAgain: 'Отправить ещё один фидбек',
         error: 'Ошибка при отправке. Попробуйте позже.',
         privacyNote: 'Все данные отправляются напрямую владельцу проекта.',
+        submitError: 'Что-то пошло не так. Попробуйте ещё раз.',
+        networkError: 'Ошибка соединения. Проверьте интернет и попробуйте снова.',
       },
     },
     demo: {
@@ -113,6 +117,17 @@ export const translations = {
         title: 'Что происходит прямо сейчас',
         subtitle: 'АНАЛИЗИРУЕМ • ВСЁ ПРОЗРАЧНО',
         note: 'Это демонстрация. В реальной версии кадры будут зашифрованы до отправки.',
+        progressLabel: 'Глубокий мультимодальный анализ',
+      },
+      extraction: {
+        title: 'ЛОКАЛЬНАЯ ОБРАБОТКА',
+        analyzing: 'Анализируем ваше видео на устройстве',
+        extracting: 'Извлечение и оценка кадров локально. Ничего не покидает браузер.',
+        timeNote: 'Это может занять несколько секунд для длинных видео. Все вычисления происходят на вашем устройстве.',
+        pleaseSelect: 'Пожалуйста, выберите видеофайл',
+        preparing: 'Подготовка видео...',
+        analyzingFrame: (current: number, total: number) => `Анализ кадра ${current} из ${total}`,
+        selectingBest: 'Выбор лучших кадров...',
       },
       result: {
         badge: 'ВАШ ЧЕК-ИН ГОТОВ',
@@ -137,6 +152,7 @@ export const translations = {
         generic: 'Не удалось получить доступ к камере и микрофону.',
         loadVideo: 'Не удалось загрузить видео. Попробуйте другой файл.',
         shortVideo: 'Видео слишком короткое для анализа (минимум ~8 секунд).',
+        selectVideoFile: 'Пожалуйста, выберите видеофайл',
       },
     },
   },
@@ -258,6 +274,8 @@ export const translations = {
           { num: '4', title: 'Only 5–10 frames', desc: 'Server never sees the original' },
         ],
       },
+      transparencyBadge: 'TRANSPARENCY',
+      selfPricingBadge: 'SELF-PRICING + FEEDBACK',
       philosophy: {
         label: 'PROJECT PHILOSOPHY',
         title: 'Smoke, not fire.',
@@ -290,6 +308,8 @@ export const translations = {
         sendAgain: 'Send another feedback',
         error: 'Something went wrong while sending. Please try again later.',
         privacyNote: 'All data is sent directly to the project owner.',
+        submitError: 'Something went wrong. Please try again.',
+        networkError: 'Connection error. Please check your internet and try again.',
       },
     },
     demo: {
@@ -318,6 +338,17 @@ export const translations = {
         title: 'What is happening right now',
         subtitle: 'ANALYZING • FULL TRANSPARENCY',
         note: 'This is a demo. In the real version frames will be encrypted before leaving your device.',
+        progressLabel: 'Deep multimodal analysis',
+      },
+      extraction: {
+        title: 'LOCAL PROCESSING',
+        analyzing: 'Analyzing your video on device',
+        extracting: 'Extracting & scoring frames locally. Nothing leaves your browser.',
+        timeNote: 'This can take a few seconds for longer videos. All computation happens on your device.',
+        pleaseSelect: 'Please select a video file',
+        preparing: 'Preparing video...',
+        analyzingFrame: (current: number, total: number) => `Analyzing frame ${current} of ${total}`,
+        selectingBest: 'Selecting best frames...',
       },
       result: {
         badge: 'YOUR CHECK-IN IS READY',
@@ -342,6 +373,7 @@ export const translations = {
         generic: 'Failed to access camera or microphone.',
         loadVideo: 'Failed to load the video. Please try a different file.',
         shortVideo: 'Video is too short for analysis (minimum ~8 seconds).',
+        selectVideoFile: 'Please select a video file',
       },
     },
     pipeline: {
@@ -463,6 +495,8 @@ export const translations = {
           { num: '4', title: 'Nur 5–10 Bilder', desc: 'Server sieht nie das Original' },
         ],
       },
+      transparencyBadge: 'TRANSPARENZ',
+      selfPricingBadge: 'SELF-PRICING + FEEDBACK',
       philosophy: {
         label: 'PROJEKT-PHILOSOPHIE',
         title: 'Rauch, kein Feuer.',
@@ -495,6 +529,8 @@ export const translations = {
         sendAgain: 'Weiteres Feedback senden',
         error: 'Beim Senden ist ein Fehler aufgetreten. Bitte später erneut versuchen.',
         privacyNote: 'Alle Daten werden direkt an den Projektinhaber gesendet.',
+        submitError: 'Etwas ist schiefgelaufen. Bitte erneut versuchen.',
+        networkError: 'Verbindungsfehler. Bitte Internetverbindung prüfen und erneut versuchen.',
       },
     },
     demo: {
@@ -523,6 +559,17 @@ export const translations = {
         title: 'Was gerade passiert',
         subtitle: 'ANALYSE • VOLLE TRANSPARENZ',
         note: 'Das ist eine Demo. In der echten Version werden die Bilder vor dem Versand verschlüsselt.',
+        progressLabel: 'Tiefgehende multimodale Analyse',
+      },
+      extraction: {
+        title: 'LOKALE VERARBEITUNG',
+        analyzing: 'Analysiere dein Video auf dem Gerät',
+        extracting: 'Extrahiere und bewerte Frames lokal. Nichts verlässt den Browser.',
+        timeNote: 'Dies kann bei längeren Videos einige Sekunden dauern. Alle Berechnungen laufen auf deinem Gerät.',
+        pleaseSelect: 'Bitte wähle eine Videodatei aus',
+        preparing: 'Video wird vorbereitet...',
+        analyzingFrame: (current: number, total: number) => `Analysiere Frame ${current} von ${total}`,
+        selectingBest: 'Wähle die besten Frames...',
       },
       result: {
         badge: 'DEIN CHECK-IN IST BEREIT',
@@ -547,6 +594,7 @@ export const translations = {
         generic: 'Zugriff auf Kamera oder Mikrofon fehlgeschlagen.',
         loadVideo: 'Video konnte nicht geladen werden. Bitte eine andere Datei versuchen.',
         shortVideo: 'Video ist zu kurz für die Analyse (mindestens ca. 8 Sekunden).',
+        selectVideoFile: 'Bitte wähle eine Videodatei aus',
       },
     },
     pipeline: {
