@@ -278,22 +278,22 @@ export default function MindGuardDemo() {
         </div>
       </div>
 
-      <div className="max-w-5xl mx-auto px-6 py-10">
+      <div className="max-w-5xl mx-auto px-4 sm:px-6 py-8 sm:py-10">
         {/* INTRO - with beautiful Drag & Drop */}
         {step === 'intro' && (
-          <div className="max-w-3xl mx-auto text-center pt-12">
-            <div className="text-[#85edb2] text-sm tracking-[3px] mb-3">30–60 SECONDS • LOCAL ONLY • NO PRESSURE</div>
-            <h1 className="text-6xl font-semibold tracking-[-1.5px] leading-none mb-6">{t.demo.intro.title}</h1>
-            <p className="text-xl text-[#94a3b8] mb-10">{t.demo.intro.subtitle}</p>
+          <div className="max-w-3xl mx-auto text-center pt-8 sm:pt-12">
+            <div className="text-[#85edb2] text-[10px] sm:text-sm tracking-[2px] sm:tracking-[3px] mb-3 px-2">30–60 SECONDS • LOCAL ONLY • NO PRESSURE</div>
+            <h1 className="text-4xl sm:text-5xl md:text-6xl font-semibold tracking-[-1px] sm:tracking-[-1.5px] leading-none mb-5 sm:mb-6 px-2">{t.demo.intro.title}</h1>
+            <p className="text-lg sm:text-xl text-[#94a3b8] mb-8 sm:mb-10 px-3">{t.demo.intro.subtitle}</p>
 
-            <div className="flex flex-col md:flex-row gap-4 justify-center items-stretch">
+            <div className="flex flex-col md:flex-row gap-3 sm:gap-4 justify-center items-stretch px-1">
               {/* Record live */}
               <button
                 onClick={handleStartRecording}
                 disabled={recorder.isRecording}
-                className="record-button group flex-1 inline-flex h-20 items-center justify-center gap-3 rounded-3xl bg-[#00ff9d] px-10 text-2xl font-medium text-[#0a0b0f] transition-all active:scale-[0.985] disabled:opacity-70"
+                className="record-button group flex-1 inline-flex h-16 sm:h-20 items-center justify-center gap-3 rounded-3xl bg-[#00ff9d] px-8 sm:px-10 text-xl sm:text-2xl font-medium text-[#0a0b0f] transition-all active:scale-[0.985] disabled:opacity-70"
               >
-                <Play className="h-7 w-7" />
+                <Play className="h-6 w-6 sm:h-7 sm:w-7" />
                 {t.demo.intro.record}
               </button>
 
@@ -370,9 +370,9 @@ export default function MindGuardDemo() {
         {/* RECORDING SCREEN */}
         {step === 'recording' && (
           <div className="max-w-3xl mx-auto">
-            <div className="text-center mb-8">
-              <div className="text-[#85edb2] tracking-[2px] text-sm mb-2">{t.demo.recording.hint}</div>
-              <div className="text-4xl font-semibold tracking-tight">{t.demo.recording.title}</div>
+            <div className="text-center mb-6 sm:mb-8 px-2">
+              <div className="text-[#85edb2] tracking-[2px] text-xs sm:text-sm mb-1.5 sm:mb-2">{t.demo.recording.hint}</div>
+              <div className="text-3xl sm:text-4xl font-semibold tracking-tight">{t.demo.recording.title}</div>
             </div>
 
             {/* Big beautiful preview + waveform */}
@@ -397,16 +397,16 @@ export default function MindGuardDemo() {
               ))}
             </div>
 
-            <div className="flex items-center justify-between text-sm mb-4 px-1">
-              <div className="font-mono text-[#85edb2] text-3xl tabular-nums tracking-tighter">{recorder.duration.toFixed(0)}<span className="text-base align-super">s</span></div>
-              <div className="text-[#64748b]">{t.demo.recording.min}</div>
+            <div className="flex items-center justify-between text-sm mb-4 px-2">
+              <div className="font-mono text-[#85edb2] text-2xl sm:text-3xl tabular-nums tracking-tighter">{recorder.duration.toFixed(0)}<span className="text-xs sm:text-base align-super">s</span></div>
+              <div className="text-[#64748b] text-xs sm:text-sm text-right">{t.demo.recording.min}</div>
             </div>
 
-            <div className="flex gap-4">
-              <button onClick={handleStopRecording} disabled={!recorder.canStop} className="flex-1 h-16 rounded-2xl bg-white/5 hover:bg-white/10 border border-[#272b33] flex items-center justify-center gap-3 text-lg disabled:opacity-50">
-                <Square className="h-5 w-5" /> {t.demo.recording.stop}
+            <div className="flex gap-3 sm:gap-4 px-1">
+              <button onClick={handleStopRecording} disabled={!recorder.canStop} className="flex-1 h-14 sm:h-16 rounded-2xl bg-white/5 hover:bg-white/10 border border-[#272b33] flex items-center justify-center gap-2 sm:gap-3 text-base sm:text-lg disabled:opacity-50">
+                <Square className="h-4 w-4 sm:h-5 sm:w-5" /> {t.demo.recording.stop}
               </button>
-              <button onClick={recorder.cancelRecording} className="flex-1 h-16 rounded-2xl border border-[#272b33] hover:bg-[#121317]">{t.common.cancel}</button>
+              <button onClick={recorder.cancelRecording} className="flex-1 h-14 sm:h-16 rounded-2xl border border-[#272b33] hover:bg-[#121317] text-sm sm:text-base">{t.common.cancel}</button>
             </div>
           </div>
         )}
@@ -414,13 +414,13 @@ export default function MindGuardDemo() {
         {/* FRAME SELECTION */}
         {step === 'selecting' && frames.length > 0 && (
           <div>
-            <div className="mb-8">
-              <div className="uppercase tracking-[2px] text-xs text-[#85edb2]">STEP 2 OF 3 — LOCAL ONLY</div>
-              <h2 className="text-4xl font-semibold tracking-[-1px] mt-2">{t.demo.selecting.title}</h2>
-              <p className="mt-3 text-[#94a3b8]">{t.demo.selecting.subtitle}</p>
+            <div className="mb-6 sm:mb-8 px-1">
+              <div className="uppercase tracking-[2px] text-[10px] sm:text-xs text-[#85edb2]">STEP 2 OF 3 — LOCAL ONLY</div>
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-semibold tracking-[-0.5px] sm:tracking-[-1px] mt-1.5 sm:mt-2">{t.demo.selecting.title}</h2>
+              <p className="mt-2 sm:mt-3 text-[#94a3b8] text-sm sm:text-base">{t.demo.selecting.subtitle}</p>
             </div>
 
-            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-3 mb-10">
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-2 sm:gap-3 mb-8 sm:mb-10">
               {frames.map((frame) => {
                 const isSelected = selectedFrames.some(f => f.id === frame.id);
                 return (
@@ -495,24 +495,24 @@ export default function MindGuardDemo() {
         {/* BEAUTIFUL RESULT */}
         {step === 'result' && result && (
           <div className="max-w-4xl mx-auto">
-            <div className="flex justify-between items-start mb-10">
+            <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-4 mb-8 sm:mb-10 px-1">
               <div>
-                <div className="text-[#85edb2] tracking-[2px] text-sm">{t.demo.result.badge}</div>
-                <div className="text-5xl font-semibold tracking-[-1.2px] mt-2">{result.overall}</div>
+                <div className="text-[#85edb2] tracking-[2px] text-xs sm:text-sm">{t.demo.result.badge}</div>
+                <div className="text-3xl sm:text-4xl md:text-5xl font-semibold tracking-[-0.8px] sm:tracking-[-1.2px] mt-1 sm:mt-2">{result.overall}</div>
               </div>
-              <button onClick={resetDemo} className="flex items-center gap-2 text-sm border border-[#272b33] hover:bg-[#121317] px-5 h-11 rounded-2xl">
+              <button onClick={resetDemo} className="self-start sm:self-auto flex items-center gap-2 text-sm border border-[#272b33] hover:bg-[#121317] px-4 sm:px-5 h-10 sm:h-11 rounded-2xl whitespace-nowrap">
                 <RefreshCw className="h-4 w-4" /> {t.demo.result.newCheckin}
               </button>
             </div>
 
-            <div className="prose prose-invert max-w-none mb-12 text-[#c5d0e0]">
-              <p className="text-2xl leading-tight text-[#f1f5f9]">{result.headline}</p>
-              <p className="text-lg mt-4 text-[#94a3b8]">{result.summary}</p>
+            <div className="prose prose-invert max-w-none mb-8 sm:mb-12 text-[#c5d0e0] px-1">
+              <p className="text-xl sm:text-2xl leading-tight text-[#f1f5f9]">{result.headline}</p>
+              <p className="text-base sm:text-lg mt-3 sm:mt-4 text-[#94a3b8]">{result.summary}</p>
             </div>
 
             {/* Visual Metrics — much better than raw numbers */}
-            <div className="mb-12">
-              <div className="uppercase tracking-[1.5px] text-xs mb-4 text-[#85edb2]">{t.demo.result.metricsTitle}</div>
+            <div className="mb-10 sm:mb-12 px-1">
+              <div className="uppercase tracking-[1.5px] text-[10px] sm:text-xs mb-3 sm:mb-4 text-[#85edb2]">{t.demo.result.metricsTitle}</div>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 {Object.entries(result.scores).map(([key, value]) => {
                   const pct = Math.min(100, Math.max(0, value));
@@ -544,8 +544,8 @@ export default function MindGuardDemo() {
             </div>
 
             {/* Advice */}
-            <div className="mb-14">
-              <div className="uppercase tracking-[1.5px] text-xs mb-4 text-[#85edb2]">{t.demo.result.adviceTitle}</div>
+            <div className="mb-12 sm:mb-14 px-1">
+              <div className="uppercase tracking-[1.5px] text-[10px] sm:text-xs mb-3 sm:mb-4 text-[#85edb2]">{t.demo.result.adviceTitle}</div>
               <div className="space-y-4">
                 {result.advice.map((a, i) => (
                   <div key={i} className="card p-7">

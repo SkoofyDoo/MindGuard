@@ -88,13 +88,13 @@ export function SelfPricingForm() {
         <label className="block text-sm font-medium text-[#94a3b8] mb-3 tracking-wider">
           {sp.priceLabel || 'Выберите комфортный для вас ценник'}
         </label>
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 sm:gap-3">
           {PRICE_OPTIONS.map((price) => (
             <button
               key={price}
               type="button"
               onClick={() => setSelectedPrice(price)}
-              className={`px-6 py-4 rounded-2xl border text-lg font-medium transition-all ${
+              className={`px-4 sm:px-6 py-3 sm:py-4 rounded-2xl border text-base sm:text-lg font-medium transition-all ${
                 selectedPrice === price
                   ? 'border-[#00ff9d] bg-[#00ff9d]/10 text-[#00ff9d]'
                   : 'border-[#272b33] hover:border-[#3a3f4a] hover:bg-[#1a1c22]'
@@ -106,7 +106,7 @@ export function SelfPricingForm() {
           <button
             type="button"
             onClick={() => setSelectedPrice('other')}
-            className={`px-6 py-4 rounded-2xl border text-lg font-medium transition-all ${
+            className={`px-4 sm:px-6 py-3 sm:py-4 rounded-2xl border text-base sm:text-lg font-medium transition-all ${
               selectedPrice === 'other'
                 ? 'border-[#00ff9d] bg-[#00ff9d]/10 text-[#00ff9d]'
                 : 'border-[#272b33] hover:border-[#3a3f4a] hover:bg-[#1a1c22]'
@@ -187,12 +187,12 @@ export function SelfPricingForm() {
       <button
         type="submit"
         disabled={isSubmitting || (selectedPrice === 'other' && !customPrice)}
-        className="w-full rounded-2xl bg-[#00ff9d] py-4 text-xl font-medium text-[#0a0b0f] transition-all hover:bg-[#85edb2] disabled:opacity-60 disabled:cursor-not-allowed"
+        className="w-full rounded-2xl bg-[#00ff9d] py-3.5 sm:py-4 text-lg sm:text-xl font-medium text-[#0a0b0f] transition-all hover:bg-[#85edb2] disabled:opacity-60 disabled:cursor-not-allowed"
       >
         {isSubmitting ? (sp.submitting || 'Отправляем...') : (sp.submit || 'Отправить фидбек')}
       </button>
 
-      <p className="text-center text-xs text-[#64748b]">
+      <p className="text-center text-[10px] sm:text-xs text-[#64748b] px-2">
         {sp.privacyNote || 'All data is sent directly to the project owner.'}
       </p>
     </form>

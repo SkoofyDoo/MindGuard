@@ -66,17 +66,17 @@ export function Roadmap() {
   };
 
   return (
-    <section className="border-t border-[#272b33] bg-[#0a0b0f] py-20">
-      <div className="max-w-5xl mx-auto px-6">
-        <div className="text-center mb-14">
-          <div className="text-[#85edb2] text-xs tracking-[3px] mb-3">{roadmap.transparencyBadge || (isRussian ? 'ПРОЗРАЧНОСТЬ' : 'TRANSPARENCY')}</div>
-          <h2 className="text-5xl font-semibold tracking-[-1.5px] mb-4">{roadmap.title || (isRussian ? 'План развития' : 'Roadmap')}</h2>
-          <p className="text-xl text-[#94a3b8] max-w-md mx-auto">
+    <section className="border-t border-[#272b33] bg-[#0a0b0f] py-12 sm:py-20">
+      <div className="max-w-5xl mx-auto px-5 sm:px-6">
+        <div className="text-center mb-10 sm:mb-14">
+          <div className="text-[#85edb2] text-[10px] sm:text-xs tracking-[2px] sm:tracking-[3px] mb-2 sm:mb-3">{roadmap.transparencyBadge || (isRussian ? 'ПРОЗРАЧНОСТЬ' : 'TRANSPARENCY')}</div>
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-semibold tracking-[-1px] sm:tracking-[-1.5px] mb-3 sm:mb-4">{roadmap.title || (isRussian ? 'План развития' : 'Roadmap')}</h2>
+          <p className="text-lg sm:text-xl text-[#94a3b8] max-w-md mx-auto">
             { roadmap.subtitle || (isRussian ? 'Что мы планируем сделать в ближайшее время' : 'What we plan to build in the near future') }
           </p>
         </div>
 
-        <div className="space-y-6">
+        <div className="space-y-4 sm:space-y-6">
           {phases.map((phase: any, index: number) => (
             <motion.div
               key={phase.key || index}
@@ -84,7 +84,7 @@ export function Roadmap() {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: index * 0.06 }}
               viewport={{ once: true }}
-              className="group relative rounded-3xl border border-[#272b33] bg-[#121317] p-8 transition-all hover:border-[#3a3f4a]"
+              className="group relative rounded-3xl border border-[#272b33] bg-[#121317] p-6 sm:p-8 transition-all hover:border-[#3a3f4a]"
             >
               <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-6">
                 <div className="flex-1">
