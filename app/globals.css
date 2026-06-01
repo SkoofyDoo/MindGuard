@@ -109,7 +109,8 @@ body {
 }
 
 /* Elegant typography scale */
-h1, .text-display {
+h1,
+.text-display {
   font-feature-settings: "tnum" "ss01";
   letter-spacing: -0.025em;
 }
@@ -135,19 +136,21 @@ h1, .text-display {
   background: var(--bg-elevated);
   border: 1px solid var(--border);
   border-radius: var(--radius);
-  transition: transform 0.2s cubic-bezier(0.23, 1, 0.32, 1), 
-              border-color 0.2s ease,
-              box-shadow 0.2s ease;
+  transition: transform 0.2s cubic-bezier(0.23, 1, 0.32, 1),
+    border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
 .card:hover {
   border-color: var(--border-strong);
   transform: translateY(-2px);
-  box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+  box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1),
+    0 8px 10px -6px rgb(0 0 0 / 0.1);
 }
 
 /* Calm focus states */
-input, textarea, select {
+input,
+textarea,
+select {
   background: var(--bg-elevated);
   border: 1px solid var(--border);
   color: var(--text-primary);
@@ -155,7 +158,8 @@ input, textarea, select {
   transition: all 0.15s ease;
 }
 
-input:focus, textarea:focus {
+input:focus,
+textarea:focus {
   outline: none;
   border-color: var(--lime);
   box-shadow: 0 0 0 3px rgb(0 255 157 / 0.1);
@@ -163,7 +167,7 @@ input:focus, textarea:focus {
 
 /* Recording specific */
 .record-button {
-  transition: all 0.3s cubic-bezier(0.23, 1.0, 0.32, 1);
+  transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
 }
 
 .record-button.recording {
@@ -171,8 +175,15 @@ input:focus, textarea:focus {
 }
 
 @keyframes pulse-gentle {
-  0%, 100% { transform: scale(1); box-shadow: 0 0 0 0 rgb(239 68 68 / 0.4); }
-  50% { transform: scale(1.02); box-shadow: 0 0 0 20px rgb(239 68 68 / 0); }
+  0%,
+  100% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgb(239 68 68 / 0.4);
+  }
+  50% {
+    transform: scale(1.02);
+    box-shadow: 0 0 0 20px rgb(239 68 68 / 0);
+  }
 }
 
 /* Pipeline visualizer stages */
@@ -213,7 +224,9 @@ input:focus, textarea:focus {
 
 /* Reduced motion respect */
 @media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after {
+  *,
+  *::before,
+  *::after {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;

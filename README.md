@@ -50,6 +50,39 @@ MindGuard is currently in an advanced prototype / high-fidelity demo stage.
 
 Everything related to video processing runs **entirely in the browser**. No raw video ever leaves the user’s device in the current version.
 
+## Real-World Validation Experiment
+
+**Date:** Started May 31, 2026  
+**Channel:** Instagram Advertising (Germany)  
+**Objective:** A low-budget idea validation test. Random users were invited to try the live demo, suggest a fair monthly price they would pay for the product, and join the Waitlist.
+
+**Experiment Parameters**
+- **Country:** Germany
+- **Ad budget:** €10
+- **Most active age group:** 25–34 years
+
+**Results**
+
+| Metric                  | Count |
+|-------------------------|-------|
+| Ad impressions / views  | 553   |
+| Landing page visits     | 46    |
+| Waitlist sign-ups       | 0     |
+
+**Key Insights — Why zero conversions?**
+
+- The product's value proposition was not immediately clear to first-time visitors
+- Reliance on mocked data and simulated analysis results reduced perceived credibility and usefulness
+- Strong concerns around video privacy and potential data leakage, even with explicit "zero-knowledge" and local-processing messaging
+
+**Outcome**
+
+The test returned a clear directional signal:
+
+> **0 people** were willing to join the Waitlist after experiencing the current version of the product.
+
+This real-world feedback is informing the next iterations of positioning, messaging clarity, trust-building mechanisms, and overall product experience.
+
 ## How It Works (High Level)
 
 1. User records or uploads a short video (30–60s)
