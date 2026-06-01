@@ -31,9 +31,9 @@ The tool is designed to be useful and non-intrusive — focused on monitoring an
 - **Beauty matters.** The interface is deliberately calm, premium, and non-clinical.
 - **No patients, only people.** This is not a medical or therapeutic tool.
 
-## Current Status — Phase 1 (Live)
+## Current Status — Phase 1 (Showcase)
 
-MindGuard is currently in an advanced prototype / high-fidelity demo stage.
+MindGuard is a high-fidelity technical showcase and is no longer under active development.
 
 **What is fully working today:**
 
@@ -83,6 +83,23 @@ The test returned a clear directional signal:
 
 This real-world feedback is informing the next iterations of positioning, messaging clarity, trust-building mechanisms, and overall product experience.
 
+## Project Conclusion
+
+Following the real-world validation experiment, several significant challenges were identified:
+
+- Substantial hidden complexities and risks in the emotional AI domain
+- Persistent low levels of public trust toward AI systems that analyze personal emotional and biometric data (video and voice)
+
+As a direct result, the decision was made to **stop development at Phase 1** and fully abandon the original roadmap.
+
+**MindGuard now exists as a simple technical showcase** — a high-fidelity demonstration of modern web capabilities rather than an active product in development.
+
+### Build & Validation Metrics
+
+- **Development time:** 3 hours
+- **Total cost (development + validation):** approximately €20
+- **Methodology:** Spec Driven Development
+
 ## How It Works (High Level)
 
 1. User records or uploads a short video (30–60s)
@@ -100,38 +117,13 @@ This real-world feedback is informing the next iterations of positioning, messag
 - Resend for transactional emails (Self-Pricing form)
 - Tailwind + custom premium design system
 
-## Roadmap
+## Roadmap (Discontinued)
 
-### Phase 1 — Foundation & First Impression (Current)
+Further development of MindGuard has been halted at Phase 1.
 
-- Marketing landing + Live Demo
-- Client-side video processing and intelligent frame selection
-- Beautiful results visualization
-- Multilingual support (EN / RU / DE)
-- Self-Pricing + Feedback form with real email delivery
+The original multi-phase roadmap (including local history, real multimodal AI, user accounts, and public launch) has been abandoned following the validation results and identified risks in the emotional AI space.
 
-### Phase 2 — History & Privacy (Next)
-
-- Local history of check-ins (IndexedDB)
-- Long-term emotional trends and patterns
-- Full device-side AES-256 encryption with user passphrase
-- Privacy settings and data control
-
-### Phase 3 — Real Multimodal AI
-
-- Production-grade backend using LangGraph
-- True multimodal analysis (Vision + Audio prosody + Text)
-- Significantly higher quality and more personalized insights
-- Optional secure server-side processing (with explicit user consent)
-
-### Phase 4 — Scale & Public Launch
-
-- User accounts with end-to-end encrypted sync across devices
-- Live pricing and subscription management
-- Public product launch
-- Partnerships and thoughtful integrations
-
-The plan is intentionally ambitious but grounded. We are moving slowly and deliberately, prioritizing privacy, quality, and calm user experience over speed.
+The project is maintained as a static technical demonstration only. No additional features or phases are planned.
 
 ## Getting Started
 
@@ -166,13 +158,12 @@ After deployment you will receive a public HTTPS URL. Open it on your phone to t
 
 ## Privacy & Data
 
-MindGuard is built with a zero-knowledge mindset:
+MindGuard was built with a strong zero-knowledge mindset:
 
-- In Phase 1, **zero** video data ever leaves the browser.
-- Future versions will only ever send a very small number of selected, encrypted frames.
-- The user remains in full control at every step.
+- All video processing happens **entirely in the browser**.
+- No raw video data ever leaves the user's device in this implementation.
 
-This is not a data collection product. It is a reflection tool.
+This project is no longer in active development. It serves as a technical demonstration of client-side video handling and privacy-first UI patterns.
 
 ---
 
